@@ -1,4 +1,4 @@
-package com.jwsolutions.songanalyzer.songinfoproviders.mockeditunes;
+package com.jwsolutions.songanalyzer.songinfoproviders.itunes;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

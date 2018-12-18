@@ -1,4 +1,4 @@
-package com.jwsolutions.songanalyzer.songinfoproviders.mockeditunes;
+package com.jwsolutions.songanalyzer.songinfoproviders.itunes;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jwsolutions.songanalyzer.domain.SongInfo;
@@ -25,7 +25,7 @@ class ITunesJsonSongParser {
      * @return collection of song metadata
      * @throws IOException if error occurred during reading data from the input data stream
      */
-    public Collection<SongInfo> parse(InputStream inputStream) throws IOException {
+    Collection<SongInfo> parse(InputStream inputStream) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         final ITunesResponse response = mapper.readValue(inputStream, ITunesResponse.class);
         final List<ITunesSongInfo> results = response.getResults();

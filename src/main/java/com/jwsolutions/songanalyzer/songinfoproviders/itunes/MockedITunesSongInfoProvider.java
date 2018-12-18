@@ -1,4 +1,4 @@
-package com.jwsolutions.songanalyzer.songinfoproviders.mockeditunes;
+package com.jwsolutions.songanalyzer.songinfoproviders.itunes;
 
 import com.jwsolutions.songanalyzer.domain.SongInfo;
 import com.jwsolutions.songanalyzer.songinfoproviders.SongInfoProvider;

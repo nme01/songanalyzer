@@ -1,4 +1,4 @@
-package com.jwsolutions.songanalyzer.songinfoproviders.mockeditunes;
+package com.jwsolutions.songanalyzer.songinfoproviders.itunes;
 
 import com.jwsolutions.songanalyzer.domain.SongInfo;
 import com.jwsolutions.songanalyzer.domain.money.Currency;
@@ -30,7 +30,7 @@ class MockedITunesSongInfoProviderTest {
     }
 
     @Test
-    @DisplayName("Should find one song")
+    @DisplayName("Should find \"In Between Dreams\" song")
     void find() throws IOException {
         SongQuery songQuery = mockSongQuery();
 

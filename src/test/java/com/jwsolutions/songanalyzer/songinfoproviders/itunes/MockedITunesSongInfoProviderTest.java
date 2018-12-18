@@ -56,7 +56,7 @@ class MockedITunesSongInfoProviderTest {
 
     private SongQuery mockSongQuery() {
         SongQuery query = mock(SongQuery.class);
-        when(query.getQueryPhrases()).thenReturn(List.of("jack", "jackson"));
+        when(query.getQueryPhrases()).thenReturn(List.of("jack", "johnson"));
         return query;
     }
 

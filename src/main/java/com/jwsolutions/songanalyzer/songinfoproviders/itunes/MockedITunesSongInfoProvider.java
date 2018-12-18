@@ -17,7 +17,7 @@ public class MockedITunesSongInfoProvider implements SongInfoProvider {
 
     private static final SongQuery MOCKED_QUERY = new SongQueryBuilder()
         .append("jack")
-        .append("jackson")
+        .append("johnson")
         .build();
 
     private final URL mockedDataUrl;

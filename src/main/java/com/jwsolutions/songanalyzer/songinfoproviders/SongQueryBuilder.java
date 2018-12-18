@@ -7,7 +7,8 @@ public class SongQueryBuilder {
     private List<String> queryStrings = new LinkedList<>();
 
     public SongQueryBuilder append(String searchPhrase) {
-        queryStrings.add(searchPhrase);
+        final String preprocessedString = searchPhrase.trim().toLowerCase();
+        queryStrings.add(preprocessedString);
         return this;
     }
 

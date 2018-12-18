@@ -22,7 +22,7 @@ import java.util.Collections;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-class TestSampleSampleReportGenerator {
+class SampleSampleReportGeneratorTest {
 
     private ByteArrayOutputStream byteArrayStream;
     private SampleReportGenerator reportGenerator;

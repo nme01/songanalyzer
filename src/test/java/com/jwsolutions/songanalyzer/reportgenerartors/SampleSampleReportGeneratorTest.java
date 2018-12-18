@@ -4,6 +4,8 @@ import com.jwsolutions.songanalyzer.analyzers.AverageSongPriceAnalysis;
 import com.jwsolutions.songanalyzer.analyzers.DistinctCollectionsAnalysis;
 import com.jwsolutions.songanalyzer.analyzers.TotalSongTimeAnalysis;
 import com.jwsolutions.songanalyzer.domain.SongInfo;
+import com.jwsolutions.songanalyzer.domain.money.Currency;
+import com.jwsolutions.songanalyzer.domain.money.Price;
 import com.jwsolutions.songanalyzer.songinfoproviders.SongInfoProvider;
 import com.jwsolutions.songanalyzer.songinfoproviders.SongQuery;
 import org.junit.jupiter.api.Assertions;
@@ -13,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.math.BigDecimal;
 import java.time.Duration;
@@ -29,7 +32,7 @@ class SampleSampleReportGeneratorTest {
 
     private final Collection<SongInfo> songInfos = Collections.emptyList();
     private final Duration totalDuration = Duration.ofSeconds(120001); // 33h 20min 01s
-    private final BigDecimal averagePrice = new BigDecimal("13.10");
+    private final Price averagePrice = new Price(new BigDecimal("13.10"), Currency.USD);
     private final int distinctCollectionsNumber = 420;
 
     @BeforeEach
@@ -50,7 +53,12 @@ class SampleSampleReportGeneratorTest {
 
     private SongInfoProvider mockSongInfoProvider() {
         SongInfoProvider songInfoProvider = mock(SongInfoProvider.class);
-        when(songInfoProvider.find(Mockito.any(SongQuery.class))).thenReturn(songInfos);
+        try {
+            when(songInfoProvider.find(Mockito.any(SongQuery.class))).thenReturn(songInfos);
+        } catch (IOException e) {
+            // should never get here
+            e.printStackTrace();
+        }
         return songInfoProvider;
     }
 

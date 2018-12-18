@@ -4,12 +4,13 @@ import com.jwsolutions.songanalyzer.analyzers.AverageSongPriceAnalysis;
 import com.jwsolutions.songanalyzer.analyzers.DistinctCollectionsAnalysis;
 import com.jwsolutions.songanalyzer.analyzers.TotalSongTimeAnalysis;
 import com.jwsolutions.songanalyzer.domain.SongInfo;
+import com.jwsolutions.songanalyzer.domain.money.Price;
 import com.jwsolutions.songanalyzer.songinfoproviders.SongInfoProvider;
 import com.jwsolutions.songanalyzer.songinfoproviders.SongQuery;
 import com.jwsolutions.songanalyzer.songinfoproviders.SongQueryBuilder;
 
+import java.io.IOException;
 import java.io.PrintStream;
-import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.Duration;
 import java.util.Collection;
@@ -47,7 +48,14 @@ public class SampleReportGenerator {
                 .append("johnson")
                 .build();
 
-        final Collection<SongInfo> songInfos = songInfoProvider.find(query);
+        final Collection<SongInfo> songInfos;
+        try {
+            songInfos = songInfoProvider.find(query);
+        } catch (IOException e) {
+            System.err.println("Couldn't read the data needed to generate the " + this.getClass().getSimpleName());
+            e.printStackTrace();
+            return;
+        }
 
         printTotalDuration(songInfos);
         printDistinctCollectionsNumber(songInfos);
@@ -55,7 +63,7 @@ public class SampleReportGenerator {
     }
 
     private void printAveragePrice(Collection<SongInfo> songInfos) {
-        BigDecimal avgPrice = averageSongPriceAnalysis.calculateAveragePrice(songInfos);
+        Price avgPrice = averageSongPriceAnalysis.calculateAveragePrice(songInfos);
         avgPrice = avgPrice.setScale(2, RoundingMode.HALF_UP);
         this.printStream.println("Analysis: Average price of a track " + avgPrice.toString());
     }

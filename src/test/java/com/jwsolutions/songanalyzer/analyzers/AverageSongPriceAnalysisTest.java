@@ -23,24 +23,6 @@ class AverageSongPriceAnalysisTest {
         averageSongPriceAnalysis = new AverageSongPriceAnalysis();
     }
 
-    private List<SongInfo> makeTestSongsList() {
-        return List.of(
-            new SongInfo(1L, Duration.ofMinutes(1L), "Test1", new Price("10", Currency.USD)),
-            new SongInfo(2L, Duration.ofMinutes(1L), "Test1", new Price("20", Currency.USD)),
-            new SongInfo(3L, Duration.ofMinutes(1L), "Test2", new Price("30", Currency.USD)),
-            new SongInfo(4L, Duration.ofMinutes(1L), "Test3", new Price("40", Currency.USD)),
-            new SongInfo(4L, Duration.ofMinutes(1L), "Test3", new Price("50", Currency.USD))
-        );
-    }
-
-    private List<SongInfo> makeDifferentCurrenciesSongs() {
-        return List.of(
-            new SongInfo(1L, Duration.ofMinutes(1L), "Test1", new Price("10", Currency.USD)),
-            new SongInfo(2L, Duration.ofMinutes(1L), "Test1", new Price("20", Currency.USD)),
-            new SongInfo(3L, Duration.ofMinutes(1L), "Test2", new Price("30", Currency.PLN))
-        );
-    }
-
     @Test
     @DisplayName("Average song price should be 30.00")
     void calculateAveragePrice() {
@@ -68,6 +50,24 @@ class AverageSongPriceAnalysisTest {
         assertThrows(
             DifferentCurrenciesException.class,
             () -> averageSongPriceAnalysis.calculateAveragePrice(songInfos)
+        );
+    }
+
+    private List<SongInfo> makeTestSongsList() {
+        return List.of(
+                new SongInfo(1L, Duration.ofMinutes(1L), "Test1", new Price("10", Currency.USD)),
+                new SongInfo(2L, Duration.ofMinutes(1L), "Test1", new Price("20", Currency.USD)),
+                new SongInfo(3L, Duration.ofMinutes(1L), "Test2", new Price("30", Currency.USD)),
+                new SongInfo(4L, Duration.ofMinutes(1L), "Test3", new Price("40", Currency.USD)),
+                new SongInfo(4L, Duration.ofMinutes(1L), "Test3", new Price("50", Currency.USD))
+        );
+    }
+
+    private List<SongInfo> makeDifferentCurrenciesSongs() {
+        return List.of(
+                new SongInfo(1L, Duration.ofMinutes(1L), "Test1", new Price("10", Currency.USD)),
+                new SongInfo(2L, Duration.ofMinutes(1L), "Test1", new Price("20", Currency.USD)),
+                new SongInfo(3L, Duration.ofMinutes(1L), "Test2", new Price("30", Currency.PLN))
         );
     }
 }

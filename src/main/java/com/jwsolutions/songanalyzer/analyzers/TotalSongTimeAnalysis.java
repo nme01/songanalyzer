@@ -11,6 +11,8 @@ import java.util.Collection;
 public class TotalSongTimeAnalysis {
 
     public Duration calculateTotalDuration(Collection<SongInfo> songInfos) {
-        throw new UnsupportedOperationException("Not implemented"); // TODO
+        return songInfos.stream()
+                .map(SongInfo::getDuration)
+                .reduce(Duration.ZERO, Duration::plus);
     }
 }
